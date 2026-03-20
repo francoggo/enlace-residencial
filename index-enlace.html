@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enlace Residencial | Tu casa de descanso en Mazatlán, diseñada a tu medida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --obsidiana: #0A0A0A;
+      --dorado:    #C8B98A;
+      --dorado-lt: #DDD0A8;
+      --marfil:    #F5F0E8;
+      --grafito:   #2A2A2A;
+      --marfil2:   #EDE8DF;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--marfil);
+      color: var(--grafito);
+      overflow-x: hidden;
+    }
+    .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* NAV */
+    .nav-dark {
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,185,138,0.18);
+    }
+    .nav-link { color: rgba(245,240,232,0.65); font-size: 13px; font-weight: 400; letter-spacing: .04em; transition: color .2s; }
+    .nav-link:hover { color: var(--dorado); }
+    .nav-cta { border: 1px solid var(--dorado); color: var(--dorado); padding: 9px 22px; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; transition: all .25s; }
+    .nav-cta:hover { background: var(--dorado); color: var(--obsidiana); }
+
+    /* HERO */
+    .hero-bg {
+      background: linear-gradient(160deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.82) 100%),
+        url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+    }
+    .hero-label { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--dorado); }
+    .hero-h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-style: italic; line-height: 1.08; color: var(--marfil); }
+    .hero-sub { color: rgba(245,240,232,0.78); font-weight: 300; line-height: 1.65; }
+
+    /* BUTTONS */
+    .btn-gold { display: inline-block; background: var(--dorado); color: var(--obsidiana); font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 16px 40px; transition: all .25s; border: 1px solid var(--dorado); }
+    .btn-gold:hover { background: var(--dorado-lt); transform: translateY(-2px); }
+
+    /* SECTION LABEL / TITLE */
+    .sec-label { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--dorado); display: block; margin-bottom: 14px; }
+    .sec-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; line-height: 1.12; color: var(--grafito); }
+    .sec-title-light { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; line-height: 1.12; color: var(--marfil); }
+    .gold-line { display: block; width: 48px; height: 1px; background: var(--dorado); margin: 20px 0 28px; }
+    .gold-line-center { margin: 20px auto 28px; }
+
+    /* PILARES */
+    .pilar-card { background: var(--marfil); border: 1px solid rgba(200,185,138,0.25); padding: 40px 32px; transition: border-color .25s, transform .25s; }
+    .pilar-card:hover { border-color: var(--dorado); transform: translateY(-4px); }
+    .pilar-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--dorado); color: var(--dorado); margin-bottom: 24px; }
+    .pilar-title { font-weight: 500; font-size: 17px; color: var(--grafito); margin-bottom: 12px; }
+    .pilar-body { font-size: 14px; line-height: 1.75; color: #5a5a5a; font-weight: 300; }
+
+    /* TABLA PRECIOS */
+    .precio-table { border-collapse: collapse; width: 100%; }
+    .precio-table th { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--dorado); padding: 16px 24px; border-bottom: 1px solid rgba(200,185,138,0.25); font-weight: 500; text-align: left; }
+    .precio-table td { padding: 18px 24px; font-size: 14px; border-bottom: 1px solid rgba(200,185,138,0.12); font-weight: 300; }
+    .precio-table tr.featured td { background: rgba(200,185,138,0.08); }
+    .precio-highlight { color: var(--dorado); font-weight: 500; font-size: 16px; }
+    .precio-green { color: #8DB87A; font-weight: 500; }
+
+    /* PROYECTOS */
+    .proyecto-card { position: relative; overflow: hidden; }
+    .proyecto-card img { transition: transform .8s cubic-bezier(.25,.46,.45,.94); width: 100%; height: 100%; object-fit: cover; }
+    .proyecto-card:hover img { transform: scale(1.06); }
+    .proyecto-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.1) 60%, transparent 100%); display: flex; align-items: flex-end; padding: 24px; }
+    .proyecto-badge { font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--dorado); display: block; margin-bottom: 6px; }
+    .proyecto-name { font-size: 20px; font-weight: 400; color: var(--marfil); }
+
+    /* PAGOS */
+    .pago-step { background: transparent; border: 1px solid rgba(200,185,138,0.2); padding: 32px 24px; text-align: center; transition: border-color .25s; }
+    .pago-step:hover, .pago-step.featured { border-color: var(--dorado); background: rgba(200,185,138,0.04); }
+    .pago-num { width: 44px; height: 44px; border: 1px solid var(--dorado); color: var(--dorado); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Cormorant Garamond', serif; font-size: 20px; }
+    .pago-amount { color: var(--dorado); font-weight: 500; font-size: 15px; margin: 6px 0; }
+
+    /* PROCESO */
+    .proceso-step { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid rgba(200,185,138,0.15); }
+    .proceso-step:last-child { border-bottom: none; }
+    .proceso-num { flex-shrink: 0; width: 36px; height: 36px; border: 1px solid var(--dorado); color: var(--dorado); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; }
+    .proceso-title { font-weight: 500; font-size: 17px; margin-bottom: 6px; color: var(--grafito); }
+    .proceso-body { font-size: 14px; line-height: 1.72; color: #5a5a5a; font-weight: 300; }
+
+    /* TESTIMONIOS */
+    .testi-card { background: var(--obsidiana); border: 1px solid rgba(200,185,138,0.18); padding: 40px 36px; }
+    .testi-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.7; color: rgba(245,240,232,0.88); margin-bottom: 24px; }
+    .testi-author { font-size: 12px; font-weight: 500; letter-spacing: .1em; color: var(--dorado); }
+
+    /* FAQ */
+    details.faq-item { border: 1px solid rgba(200,185,138,0.18); margin-bottom: 6px; overflow: hidden; }
+    details.faq-item summary { padding: 20px 24px; font-weight: 500; font-size: 15px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: background .2s, color .2s; color: var(--grafito); }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item[open] summary { background: var(--obsidiana); color: var(--dorado); }
+    details.faq-item .faq-body { padding: 20px 24px; font-size: 14px; line-height: 1.75; color: #5a5a5a; font-weight: 300; border-top: 1px solid rgba(200,185,138,0.1); }
+    .faq-chevron { transition: transform .25s; font-size: 13px; color: var(--dorado); }
+    details.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+
+    /* FORM */
+    .form-input { width: 100%; background: transparent; border: 1px solid rgba(200,185,138,0.3); color: var(--marfil); padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; outline: none; transition: border-color .2s; }
+    .form-input::placeholder { color: rgba(245,240,232,0.35); }
+    .form-input:focus { border-color: var(--dorado); }
+    .form-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; color: rgba(245,240,232,0.55); display: block; margin-bottom: 8px; }
+    select.form-input option { background: var(--grafito); color: var(--marfil); }
+
+    /* STATS */
+    .stat-card { background: var(--obsidiana); border: 1px solid rgba(200,185,138,0.18); padding: 28px 24px; text-align: center; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--dorado); line-height: 1; }
+    .stat-label { font-size: 12px; color: rgba(245,240,232,0.55); margin-top: 8px; letter-spacing: .06em; }
+
+    /* AUDIENCIA */
+    .audiencia-card { border-left: 2px solid var(--dorado); padding: 20px 24px; background: rgba(200,185,138,0.04); }
+    .audiencia-label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--dorado); font-weight: 500; margin-bottom: 8px; }
+    .audiencia-body { font-size: 14px; line-height: 1.75; color: rgba(245,240,232,0.65); font-weight: 300; }
+
+    /* FOOTER */
+    footer { background: var(--obsidiana); border-top: 1px solid rgba(200,185,138,0.14); }
+
+    /* WA FLOAT */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 54px; height: 54px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: transform .2s; }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float i { color: #fff; font-size: 26px; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* HERO ANIMATIONS */
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .ha1 { animation: fadeSlideUp .9s ease .2s both; }
+    .ha2 { animation: fadeSlideUp .9s ease .45s both; }
+    .ha3 { animation: fadeSlideUp .9s ease .65s both; }
+    .ha4 { animation: fadeSlideUp .9s ease .85s both; }
+
+    @keyframes pulseDot { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+    .scroll-dot { animation: pulseDot 2s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/526691234567?text=Hola,%20me%20interesa%20saber%20m%C3%A1s%20sobre%20los%20proyectos%20de%20Enlace%20Residencial" target="_blank" class="wa-float" aria-label="Contactar por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- NAVEGACIÓN -->
+<nav class="nav-dark fixed w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+
+    <!-- Logo nav -->
+    <a href="#" class="flex-shrink-0">
+      <div style="line-height:1.1">
+        <div style="font-family:'DM Sans',sans-serif; font-size:18px; font-weight:400; letter-spacing:.2em; color:#C8B98A; text-transform:uppercase; margin-bottom:2px">Enlace</div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:300; letter-spacing:.3em; color:#7a7a7a; text-transform:uppercase">Residencial</div>
+      </div>
+    </a>
+
+    <!-- Links desktop -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#pilares"   class="nav-link">Por qué nosotros</a>
+      <a href="#precios"   class="nav-link">Precio del m²</a>
+      <a href="#proceso"   class="nav-link">Proceso</a>
+      <a href="#proyectos" class="nav-link">Proyectos</a>
+      <a href="#contacto"  class="nav-cta">Consulta gratuita</a>
+    </div>
+
+    <!-- Hamburger mobile -->
+    <button id="menuToggle" class="md:hidden p-2" style="color:rgba(245,240,232,0.7)">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t px-6 pb-6 pt-4" style="border-color:rgba(255,255,255,0.1)">
+    <div class="flex flex-col gap-5">
+      <a href="#pilares"   class="nav-link text-base" onclick="closeMobile()">Por qué nosotros</a>
+      <a href="#precios"   class="nav-link text-base" onclick="closeMobile()">Precio del m²</a>
+      <a href="#proceso"   class="nav-link text-base" onclick="closeMobile()">Proceso</a>
+      <a href="#proyectos" class="nav-link text-base" onclick="closeMobile()">Proyectos</a>
+      <a href="#contacto"  class="nav-cta inline-block text-center mt-2" onclick="closeMobile()">Consulta gratuita</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-bg relative min-h-screen flex items-center justify-center" style="padding-top:80px">
+  <div class="max-w-5xl mx-auto px-6 text-center" style="padding-bottom:140px">
+    <span class="hero-label ha1">Preventa Residencial · Mazatlán 2026</span>
+    <h1 class="hero-h1 ha2" style="font-size:clamp(52px,10vw,96px); margin-top:16px; margin-bottom:24px">
+      Tu casa.<br>Tu diseño.<br>Tu precio.
+    </h1>
+    <p class="hero-sub ha3" style="font-size:clamp(16px,2vw,20px); max-width:600px; margin:0 auto 40px">
+      Diseñamos tu segunda vivienda a tu medida, con el precio más accesible de la zona,
+      la seguridad de un arquitecto que firma con su nombre, y pagos que crecen con la obra.
+    </p>
+    <div class="ha4">
+      <a href="#contacto" class="btn-gold">Agendar consulta gratuita</a>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="absolute bottom-0 left-0 right-0 hidden md:grid grid-cols-4" style="background:rgba(10,10,10,0.75); backdrop-filter:blur(8px); border-top:1px solid rgba(255,255,255,0.08)">
+    <div class="py-5 px-6 text-center" style="border-right:1px solid rgba(255,255,255,0.08)">
+      <span class="block serif" style="font-size:30px; font-weight:300; color:var(--dorado)">12–18%</span>
+      <span class="block" style="font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:.15em; text-transform:uppercase; margin-top:4px">Plusvalía anual</span>
+    </div>
+    <div class="py-5 px-6 text-center" style="border-right:1px solid rgba(255,255,255,0.08)">
+      <span class="block serif" style="font-size:30px; font-weight:300; color:var(--dorado)">15–25%</span>
+      <span class="block" style="font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:.15em; text-transform:uppercase; margin-top:4px">Precio bajo mercado</span>
+    </div>
+    <div class="py-5 px-6 text-center" style="border-right:1px solid rgba(255,255,255,0.08)">
+      <span class="block serif" style="font-size:30px; font-weight:300; color:var(--dorado)">100%</span>
+      <span class="block" style="font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:.15em; text-transform:uppercase; margin-top:4px">Diseño a medida</span>
+    </div>
+    <div class="py-5 px-6 text-center">
+      <span class="block serif" style="font-size:30px; font-weight:300; color:var(--dorado)">$50K</span>
+      <span class="block" style="font-size:10px; color:rgba(255,255,255,0.4); letter-spacing:.15em; text-transform:uppercase; margin-top:4px">Desde apartado</span>
+    </div>
+  </div>
+
+  <!-- Scroll dot -->
+  <div class="scroll-dot absolute hidden md:flex flex-col items-center gap-2" style="bottom:90px; left:50%; transform:translateX(-50%)">
+    <div style="width:1px; height:36px; background:linear-gradient(to bottom, rgba(200,185,138,0.5), transparent)"></div>
+  </div>
+</header>
+
+<!-- PILARES -->
+<section id="pilares" class="py-28" style="background:var(--marfil2)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span class="sec-label">Por qué elegirnos</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,6vw,60px)">Tres razones para<br>invertir con nosotros</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div class="grid md:grid-cols-3 gap-px" style="background:rgba(200,185,138,0.15)">
+      <div class="pilar-card reveal">
+        <div class="pilar-icon"><i class="fas fa-chart-line"></i></div>
+        <h3 class="pilar-title">Precio inteligente</h3>
+        <span class="gold-line"></span>
+        <p class="pilar-body">Invierte en la etapa inicial y adquiere un activo con un valor entre <strong style="color:var(--grafito);font-weight:500">15% y 25% por debajo</strong> del precio comercial actual. Tu capital crece mientras construimos.</p>
+      </div>
+      <div class="pilar-card reveal" style="transition-delay:.12s">
+        <div class="pilar-icon"><i class="fas fa-pencil-ruler"></i></div>
+        <h3 class="pilar-title">Diseño 100% personalizado</h3>
+        <span class="gold-line"></span>
+        <p class="pilar-body">No vendemos modelos de serie. Cada casa diseñada desde cero — no un catálogo, un proyecto que te pertenece. Desde la distribución hasta los acabados, <strong style="color:var(--grafito);font-weight:500">tú tienes el control total.</strong></p>
+      </div>
+      <div class="pilar-card reveal" style="transition-delay:.24s">
+        <div class="pilar-icon"><i class="fas fa-wallet"></i></div>
+        <h3 class="pilar-title">Pagos vinculados a la obra</h3>
+        <span class="gold-line"></span>
+        <p class="pilar-body">Plan de pagos <strong style="color:var(--grafito);font-weight:500">ligado al avance físico real</strong> de la construcción. No pagas por promesas — pagas por avance documentado y verificable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO DEL M² -->
+<section id="precios" class="py-28" style="background:var(--obsidiana)">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Transparencia de precios</span>
+      <h2 class="sec-title-light" style="font-size:clamp(36px,6vw,60px)">El precio más inteligente<br>de Mazatlán</h2>
+      <span class="gold-line gold-line-center"></span>
+      <p style="color:rgba(245,240,232,0.6); max-width:520px; margin:0 auto; font-weight:300; line-height:1.75; font-size:14px">Aunque no cobramos por m² sino por Administración de Proyecto, estos datos basados en nuestros proyectos recientes te permiten estimar tu inversión.</p>
+    </div>
+
+    <div class="overflow-x-auto reveal" style="border:1px solid rgba(200,185,138,0.2)">
+      <table class="precio-table">
+        <thead>
+          <tr>
+            <th>Etapa del proyecto</th>
+            <th>Valor estimado por m²</th>
+            <th>Beneficio directo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="featured">
+            <td style="color:var(--marfil);font-weight:500">Nuestra Preventa — Hoy</td>
+            <td class="precio-highlight">$15,000 MXN</td>
+            <td style="color:var(--dorado);font-size:13px;font-weight:500">Ahorro inmediato · Precio congelado</td>
+          </tr>
+          <tr>
+            <td style="color:rgba(245,240,232,0.65)">Precio Residencial Mazatlán 2025</td>
+            <td style="color:rgba(245,240,232,0.65)">$17,500 – $19,000 MXN</td>
+            <td class="precio-green">+25% sobre tu inversión inicial</td>
+          </tr>
+          <tr>
+            <td style="color:rgba(245,240,232,0.65)">Valor de Mercado (Terminado)</td>
+            <td style="color:rgba(245,240,232,0.65)">$19,000 – $21,000 MXN</td>
+            <td class="precio-green">+35% Plusvalía proyectada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Incluye -->
+    <div class="mt-12 reveal">
+      <p class="sec-label text-center mb-8">Qué incluye nuestra tarifa de construcción residencial</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center py-4 px-3" style="border:1px solid rgba(200,185,138,0.15)">
+          <i class="fas fa-file-alt mb-3 block" style="color:var(--dorado);font-size:18px"></i>
+          <span style="font-size:12px;color:rgba(245,240,232,0.6)">Gestión de permisos</span>
+        </div>
+        <div class="text-center py-4 px-3" style="border:1px solid rgba(200,185,138,0.15)">
+          <i class="fas fa-hard-hat mb-3 block" style="color:var(--dorado);font-size:18px"></i>
+          <span style="font-size:12px;color:rgba(245,240,232,0.6)">Estudio de suelo</span>
+        </div>
+        <div class="text-center py-4 px-3" style="border:1px solid rgba(200,185,138,0.15)">
+          <i class="fas fa-layer-group mb-3 block" style="color:var(--dorado);font-size:18px"></i>
+          <span style="font-size:12px;color:rgba(245,240,232,0.6)">Cimentación y estructura</span>
+        </div>
+        <div class="text-center py-4 px-3" style="border:1px solid rgba(200,185,138,0.15)">
+          <i class="fas fa-paint-roller mb-3 block" style="color:var(--dorado);font-size:18px"></i>
+          <span style="font-size:12px;color:rgba(245,240,232,0.6)">Acabados y porcelanatos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="proyectos" class="py-28" style="background:var(--marfil)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Proyectos terminados</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,6vw,60px)">Lo que hemos construido<br>para familias como la tuya</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5 mb-12">
+      <div class="proyecto-card reveal" style="aspect-ratio:3/4">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Casa Marina — Enlace Residencial Mazatlán">
+        <div class="proyecto-overlay">
+          <div>
+            <span class="proyecto-badge">Preventa Residencial · Entregado</span>
+            <span class="proyecto-name">Casa Marina</span>
+          </div>
+        </div>
+      </div>
+      <div class="proyecto-card reveal" style="aspect-ratio:3/4;transition-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Casa Pacific Heights — Enlace Residencial Mazatlán">
+        <div class="proyecto-overlay">
+          <div>
+            <span class="proyecto-badge">Preventa Residencial · Entregado</span>
+            <span class="proyecto-name">Pacific Heights</span>
+          </div>
+        </div>
+      </div>
+      <div class="proyecto-card reveal" style="aspect-ratio:3/4;transition-delay:.2s">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Casa del Cabo — Enlace Residencial Mazatlán">
+        <div class="proyecto-overlay">
+          <div>
+            <span class="proyecto-badge">Preventa Residencial · En construcción</span>
+            <span class="proyecto-name">Casa del Cabo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center reveal">
+      <a href="#contacto" class="btn-gold">Quiero una casa como estas</a>
+    </div>
+  </div>
+</section>
+
+<!-- ESQUEMA DE PAGOS -->
+<section class="py-28" style="background:var(--marfil2)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Plan de inversión</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,6vw,60px)">Pagos que crecen<br>con la obra</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="pago-step reveal">
+        <div class="pago-num">1</div>
+        <h4 style="font-weight:500;font-size:16px;color:var(--grafito);margin-bottom:8px">Apartado</h4>
+        <p class="pago-amount">$50,000 MXN</p>
+        <p style="font-size:13px;color:#6a6a6a;font-weight:300;line-height:1.65">Garantiza tu terreno y congela el precio de preventa de hoy.</p>
+      </div>
+      <div class="pago-step reveal" style="transition-delay:.1s">
+        <div class="pago-num">2</div>
+        <h4 style="font-weight:500;font-size:16px;color:var(--grafito);margin-bottom:8px">Enganche 30%</h4>
+        <p class="pago-amount">Meses 1 – 6</p>
+        <p style="font-size:13px;color:#6a6a6a;font-weight:300;line-height:1.65">30% del valor total del proyecto, cubierto en cómodas parcialidades mensuales.</p>
+      </div>
+      <div class="pago-step reveal" style="transition-delay:.2s">
+        <div class="pago-num">3</div>
+        <h4 style="font-weight:500;font-size:16px;color:var(--grafito);margin-bottom:8px">Pagos de obra</h4>
+        <p class="pago-amount">Meses 7 – 22</p>
+        <p style="font-size:13px;color:#6a6a6a;font-weight:300;line-height:1.65">Aportaciones trimestrales conforme avanza la construcción real.</p>
+      </div>
+      <div class="pago-step featured reveal" style="transition-delay:.3s">
+        <div class="pago-num">4</div>
+        <h4 style="font-weight:500;font-size:16px;color:var(--grafito);margin-bottom:8px">Entrega y saldo</h4>
+        <p class="pago-amount">Mes 24</p>
+        <p style="font-size:13px;color:#6a6a6a;font-weight:300;line-height:1.65">Recibes llaves y liquidas el saldo final. Llave en mano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="py-28" style="background:var(--marfil)">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Cómo trabajamos</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,6vw,60px)">De tu idea al proyecto<br>terminado</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">1</div>
+        <div>
+          <h4 class="proceso-title">Consulta inicial</h4>
+          <p class="proceso-body">Comenzamos con una consulta en oficina o virtual y sin compromisos. Entendemos tus necesidades, presupuesto y tu visión de descanso en el Pacífico. Puedes preguntarnos lo que quieras.</p>
+        </div>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">2</div>
+        <div>
+          <h4 class="proceso-title">Diseño preliminar</h4>
+          <p class="proceso-body">Si somos los indicados el uno para el otro, comenzamos a trabajar. Te creamos un anteproyecto con la distribución básica de los espacios, la forma y el estilo de tu casa.</p>
+        </div>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">3</div>
+        <div>
+          <h4 class="proceso-title">Desarrollo del diseño</h4>
+          <p class="proceso-body">Trabajamos contigo para perfeccionar y detallar el diseño preliminar. Selección de materiales, colores, acabados e incorporación de tus detalles específicos. Juntos construimos el diseño.</p>
+        </div>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">4</div>
+        <div>
+          <h4 class="proceso-title">Ejecución con supervisión</h4>
+          <p class="proceso-body">Una vez aprobado el diseño creamos los planos de construcción completos, tramitamos permisos y coordinamos la ejecución. Reportes semanales de avance por WhatsApp con fotos de obra.</p>
+        </div>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">5</div>
+        <div>
+          <h4 class="proceso-title">Entrega llave en mano</h4>
+          <p class="proceso-body">Recibes tu casa 100% terminada, con recorrido de calidad y documentación completa. Lista para habitar o para disfrutar en tu siguiente viaje al Pacífico.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 text-center reveal">
+      <a href="#contacto" class="btn-gold">Platiquemos de tu proyecto</a>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ MAZATLÁN -->
+<section class="py-28" style="background:var(--obsidiana)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">La perla del Pacífico</span>
+      <h2 class="sec-title-light" style="font-size:clamp(36px,6vw,60px)">Invierte donde la plusvalía<br>está garantizada</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div class="grid md:grid-cols-4 gap-4 mb-14">
+      <div class="stat-card reveal">
+        <div class="stat-num">12–18%</div>
+        <div class="stat-label">Plusvalía anual documentada</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.1s">
+        <div class="stat-num">+15%</div>
+        <div class="stat-label">Crecimiento turístico 2024</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.2s">
+        <div class="stat-num">2ª</div>
+        <div class="stat-label">Ciudad más segura del noroeste</div>
+      </div>
+      <div class="stat-card reveal" style="transition-delay:.3s">
+        <div class="stat-num">Alta</div>
+        <div class="stat-label">Demanda para renta de corta estancia</div>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="audiencia-card reveal">
+        <p class="audiencia-label">Para quien teme comprar en preventa</p>
+        <p class="audiencia-body">Entendemos ese miedo. Por eso mostramos obra en proceso, cumplimos fechas documentadas y firmamos contratos con cláusulas claras. Tu enganche no desaparece: avanza con cada cimentación. Puedes visitar la obra cuando quieras.</p>
+      </div>
+      <div class="audiencia-card reveal" style="transition-delay:.1s">
+        <p class="audiencia-label">Para el inversor de fuera (GDL · MTY · CDMX)</p>
+        <p class="audiencia-body">Mazatlán creció 12-18% en plusvalía el año pasado. Marina y Cerritos están apenas empezando. Puedes entrar hoy desde $50,000 MXN de apartado, con pagos que se adaptan a tu flujo. Trato directo con el arquitecto. Sin intermediarios.</p>
+      </div>
+      <div class="audiencia-card reveal" style="transition-delay:.2s">
+        <p class="audiencia-label">Para quien busca la mejor opción en Mazatlán</p>
+        <p class="audiencia-body">Una casa genérica terminada o tu casa diseñada por ti en preventa. Precio 15-25% menor. Plusvalía desde el día uno. Pagos que crecen con la obra. La pregunta no es si puedes pagarlo — es si puedes darte el lujo de no hacerlo.</p>
+      </div>
+      <div class="audiencia-card reveal" style="transition-delay:.3s">
+        <p class="audiencia-label">Para quien duda de la calidad por el precio bajo</p>
+        <p class="audiencia-body">El precio bajo no es de los materiales: es del timing. Entras antes que el mercado. Nuestros proyectos anteriores lo demuestran: especificaciones técnicas completas, visitas a obra en proceso y clientes que ya vivieron el resultado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="py-28" style="background:var(--marfil2)">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Clientes hablan</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,6vw,60px)">¿Quién dice que hacemos<br>las mejores residencias?</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="testi-card reveal">
+        <p class="testi-quote">"Buscábamos una segunda casa en Mazatlán, pero nada nos convencía. El ahorro en preventa fue real y el proceso de diseño, fascinante. Cumplieron con cada fecha de entrega y pudimos visitar la obra cuando quisimos."</p>
+        <span class="testi-author">— Familia González · Monterrey</span>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.12s">
+        <p class="testi-quote">"Como inversión, fue la decisión más acertada. La plusvalía que ganamos antes de que nos entregaran la casa superó nuestras expectativas. Muy profesionales — cumplen en tiempo y forma."</p>
+        <span class="testi-author">— Ing. Rodrigo M. · Guadalajara</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-28" style="background:var(--marfil)">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="sec-label">Preguntas frecuentes</span>
+      <h2 class="sec-title" style="font-size:clamp(36px,5vw,52px)">Todo lo que necesitas saber</h2>
+      <span class="gold-line gold-line-center"></span>
+    </div>
+    <div>
+      <details class="faq-item reveal">
+        <summary>¿Qué pasa si la obra se retrasa? <i class="fas fa-chevron-down faq-chevron"></i></summary>
+        <div class="faq-body">Contamos con contratos con <strong>cláusulas de penalización por retraso</strong>. Además, cada pago está ligado a un hito constructivo verificable: no avanzas al siguiente pago sin evidencia documental y fotográfica del avance real.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿Puedo visitar la obra? <i class="fas fa-chevron-down faq-chevron"></i></summary>
+        <div class="faq-body"><strong>Absolutamente.</strong> Fomentamos las visitas programadas. Además, enviamos reportes semanales de avance por WhatsApp con fotos del proceso constructivo. Tu inversión, siempre transparente.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿Puedo modificar el diseño de mi casa? <i class="fas fa-chevron-down faq-chevron"></i></summary>
+        <div class="faq-body">Sí. Esa es nuestra mayor diferencia. Al ser un proyecto a medida, puedes realizar modificaciones estructurales y estéticas siempre que se mantengan dentro del marco normativo. La personalización total es parte del servicio.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>¿Puedo tramitar un crédito para financiar mi casa? <i class="fas fa-chevron-down faq-chevron"></i></summary>
+        <div class="faq-body"><strong>El crédito hipotecario bancario tradicional no aplica desde el inicio</strong>, ya que los bancos no financian proyectos en etapa de preventa. Sin embargo, sí es posible tramitar un <strong>crédito de construcción</strong>, un producto bancario diseñado específicamente para financiar la edificación por etapas conforme avanza la obra. Te orientamos en el proceso para que puedas acceder a esta opción si lo necesitas.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-28" style="background:var(--obsidiana)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+
+      <!-- Col izquierda -->
+      <div class="reveal">
+        <span class="sec-label">Agenda tu consulta</span>
+        <h2 class="sec-title-light mb-6" style="font-size:clamp(36px,6vw,60px); line-height:1.1">
+          Platiquemos de tu<br>proyecto hoy
+        </h2>
+        <span class="gold-line"></span>
+        <p style="color:rgba(245,240,232,0.65);font-weight:300;line-height:1.8;font-size:15px;margin-bottom:40px">
+          Consulta sin compromiso en oficina o virtual. Cuéntanos tu idea y te damos una estimación real de tu proyecto en Mazatlán.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <a href="https://wa.me/526691234567" class="flex items-center gap-4" style="color:rgba(245,240,232,0.7);text-decoration:none">
+            <div class="pilar-icon" style="width:44px;height:44px;flex-shrink:0"><i class="fab fa-whatsapp" style="font-size:17px"></i></div>
+            <div>
+              <span style="display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dorado);margin-bottom:3px">WhatsApp directo</span>
+              <span style="font-size:14px">+52 (669) 123-4567</span>
+            </div>
+          </a>
+          <a href="mailto:hola@enlaceresidencial.com" class="flex items-center gap-4" style="color:rgba(245,240,232,0.7);text-decoration:none">
+            <div class="pilar-icon" style="width:44px;height:44px;flex-shrink:0"><i class="fas fa-envelope" style="font-size:15px"></i></div>
+            <div>
+              <span style="display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dorado);margin-bottom:3px">Correo</span>
+              <span style="font-size:14px">hola@enlaceresidencial.com</span>
+            </div>
+          </a>
+          <div class="flex items-center gap-4" style="color:rgba(245,240,232,0.7)">
+            <div class="pilar-icon" style="width:44px;height:44px;flex-shrink:0"><i class="fas fa-map-marker-alt" style="font-size:15px"></i></div>
+            <div>
+              <span style="display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dorado);margin-bottom:3px">Ubicación</span>
+              <span style="font-size:14px">Mazatlán, Sinaloa · México</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:56px;padding-top:40px;border-top:1px solid rgba(200,185,138,0.15)">
+          <p class="serif" style="font-size:22px;font-style:italic;color:rgba(200,185,138,0.7);font-weight:300;line-height:1.5">"Diseñar y construir el hogar que merecen, al precio que hace posible el sueño."</p>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="reveal" style="transition-delay:.2s;border:1px solid rgba(200,185,138,0.2);padding:40px 36px">
+        <p class="sec-label mb-6">Tu información</p>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div style="margin-bottom:16px">
+            <label class="form-label">Nombre completo</label>
+            <input type="text" required class="form-input" placeholder="Juan Pérez">
+          </div>
+          <div class="grid grid-cols-2 gap-4" style="margin-bottom:16px">
+            <div>
+              <label class="form-label">Email</label>
+              <input type="email" required class="form-input" placeholder="juan@ejemplo.com">
+            </div>
+            <div>
+              <label class="form-label">WhatsApp</label>
+              <input type="tel" required class="form-input" placeholder="+52 669...">
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <label class="form-label">Ubicación del proyecto</label>
+            <input type="text" class="form-input" placeholder="Cerritos, Marina, Zona Dorada...">
+          </div>
+          <div class="grid grid-cols-2 gap-4" style="margin-bottom:16px">
+            <div>
+              <label class="form-label">Tipo de inversión</label>
+              <select class="form-input">
+                <option>Segunda vivienda / Descanso</option>
+                <option>Primera vivienda</option>
+                <option>Inversión / Renta</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">Presupuesto</label>
+              <select class="form-input">
+                <option>$3M – $5M MXN</option>
+                <option>$5M – $8M MXN</option>
+                <option>$8M+ MXN</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:20px">
+            <label class="form-label">Cuéntanos sobre tu proyecto</label>
+            <textarea rows="3" class="form-input" placeholder="Número de recámaras, estilo, algo especial que quieras…" style="resize:none"></textarea>
+          </div>
+          <button type="submit" class="btn-gold" style="width:100%;justify-content:center;display:block">
+            Solicitar consulta gratuita
+          </button>
+          <p id="successMsg" style="display:none;text-align:center;padding-top:16px;color:#8DB87A;font-size:14px;letter-spacing:.04em">
+            ¡Gracias! Nos pondremos en contacto contigo pronto.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-3 gap-10" style="border-bottom:1px solid rgba(200,185,138,0.12);padding-bottom:48px;margin-bottom:32px">
+      <!-- Logo footer -->
+      <div>
+        <div style="margin-bottom:16px">
+          <div style="font-family:'DM Sans',sans-serif;font-size:22px;font-weight:400;letter-spacing:.2em;color:#C8B98A;text-transform:uppercase;line-height:1.2">Enlace</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;letter-spacing:.3em;color:#6a6a6a;text-transform:uppercase;line-height:1.2">Residencial</div>
+        </div>
+        <p style="font-size:12px;color:rgba(245,240,232,0.35);line-height:1.7;max-width:200px">Firma de arquitectura y preventa residencial en Mazatlán, Sinaloa.</p>
+      </div>
+      <!-- Navegación -->
+      <div>
+        <p class="sec-label" style="margin-bottom:16px">Navegación</p>
+        <ul style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(245,240,232,0.5);list-style:none">
+          <li><a href="#pilares"   style="color:inherit;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Por qué nosotros</a></li>
+          <li><a href="#precios"   style="color:inherit;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Precio del m²</a></li>
+          <li><a href="#proyectos" style="color:inherit;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Proyectos</a></li>
+          <li><a href="#proceso"   style="color:inherit;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Proceso</a></li>
+          <li><a href="#contacto"  style="color:inherit;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Contacto</a></li>
+        </ul>
+      </div>
+      <!-- Contacto -->
+      <div>
+        <p class="sec-label" style="margin-bottom:16px">Contacto directo</p>
+        <ul style="display:flex;flex-direction:column;gap:12px;font-size:13px;color:rgba(245,240,232,0.5);list-style:none">
+          <li><a href="https://wa.me/526691234567" style="color:inherit;text-decoration:none"><i class="fab fa-whatsapp" style="color:var(--dorado);margin-right:8px"></i>WhatsApp</a></li>
+          <li><a href="mailto:hola@enlaceresidencial.com" style="color:inherit;text-decoration:none"><i class="fas fa-envelope" style="color:var(--dorado);margin-right:8px"></i>hola@enlaceresidencial.com</a></li>
+          <li><span><i class="fas fa-map-marker-alt" style="color:var(--dorado);margin-right:8px"></i>Mazatlán, Sinaloa</span></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+      <p style="font-size:11px;color:rgba(245,240,232,0.25);letter-spacing:.05em">© 2026 Enlace Residencial · Todos los derechos reservados</p>
+      <p class="serif" style="font-size:11px;color:rgba(245,240,232,0.25);letter-spacing:.05em;font-style:italic">"Tu casa. Tu diseño. Tu precio."</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function() {
+    mobileMenu.classList.toggle('hidden');
+  });
+  function closeMobile() {
+    mobileMenu.classList.add('hidden');
+  }
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function(el) { io.observe(el); });
+
+  // Form submit
+  function submitForm(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('button[type=submit]');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    setTimeout(function() {
+      document.getElementById('successMsg').style.display = 'block';
+      btn.style.display = 'none';
+    }, 900);
+  }
+</script>
+</body>
+</html>
